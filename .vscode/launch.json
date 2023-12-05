@@ -19,7 +19,7 @@
             "request": "launch",
             "module": "uvicorn",
             "args": [
-                "link_shortener.main:app",
+                "link_shortener_fastapi.main:app",
                 "--reload"
             ],
             "jinja": true,
