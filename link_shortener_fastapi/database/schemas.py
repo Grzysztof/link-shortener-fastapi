@@ -1,7 +1,6 @@
 import uuid
 import datetime
-from sqlalchemy import Column, ForeignKey, Table, orm, DateTime, Boolean
-from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy import orm, DateTime, Boolean
 
 
 class Base(orm.DeclarativeBase):
@@ -9,6 +8,7 @@ class Base(orm.DeclarativeBase):
         primary_key=True,
         default=uuid.uuid4,
     )
+
 
 class Links(Base):
     __tablename__ = "Links"
