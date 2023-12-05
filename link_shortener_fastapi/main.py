@@ -1,9 +1,10 @@
-from fastapi import FastAPI, status, Depends
+from contextlib import asynccontextmanager
 from typing import Optional
+from fastapi import FastAPI, status, Depends
 from fastapi.responses import UJSONResponse, RedirectResponse, Response
 from sqlalchemy.ext.asyncio import AsyncSession
-from link_shortener_fastapi.models import Link, LinkPayload
-from link_shortener_fastapi.database.session import get_db_session
+from link_shortener_fastapi import models
+from link_shortener_fastapi.database.session import get_db_session, create_db
 from link_shortener_fastapi.database import schemas
 
 app = FastAPI(default_response_class=UJSONResponse)
@@ -26,11 +27,11 @@ async def link_redirect(link_id: str = None):
     
 @app.post("/link")
 async def create_link(
-    data: LinkPayload,
+    data: models.LinkPayload,
     db_session: AsyncSession = Depends(get_db_session),
 ):
     new_link = schemas.Links(**data.model_dump())
     db_session.add(new_link)
-    db_session.commit()
-    db_session.refresh(new_link)
-    return Link.model_validate(new_link)
+    await db_session.commit()
+    await db_session.refresh(new_link)
+    return models.Link.model_validate(new_link)

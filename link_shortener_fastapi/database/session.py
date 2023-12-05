@@ -8,6 +8,12 @@ from sqlalchemy.ext.asyncio import (
 )
 
 from link_shortener_fastapi.config import settings
+from link_shortener_fastapi.database.schemas import Base
+
+async def create_db():
+    engine = create_async_engine(settings.DATABASE_URL)
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
 
 
 async def get_db_session() -> AsyncGenerator[AsyncSession, None]:
