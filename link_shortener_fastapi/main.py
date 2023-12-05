@@ -16,12 +16,14 @@ LinksRepository = Annotated[
     Depends(get_repository(schemas.Links)),
 ]
 
+
 @app.get("/")
 async def root():
     return {"message": "Hello World"}
 
+
 @app.get("/link/{id}")
-async def link_redirect( 
+async def link_redirect(
     links_repository: LinksRepository,
     id: UUID = None,
 ):
@@ -39,4 +41,3 @@ async def create_link(
 ):
     link = await links_repository.create(data.model_dump())
     return models.Link.model_validate(link)
- 

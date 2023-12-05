@@ -17,7 +17,8 @@ def test_post_link():
     resp = client.post("/link", json=payload)
     print(resp.json())
     assert resp.status_code == status.HTTP_200_OK
-    assert isinstance(UUID(resp.json().get("id")), UUID) 
+    assert isinstance(UUID(resp.json().get("id")), UUID)
+
 
 def test_post_get_link():
     payload = {"redirect_url": "http://www.example.com"}

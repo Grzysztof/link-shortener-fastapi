@@ -10,7 +10,6 @@ Model = TypeVar("Model", bound=schemas.Base)
 
 
 class DatabaseRepository(Generic[Model]):
-
     def __init__(self, model: type[Model], session: AsyncSession) -> None:
         self.model = model
         self.session = session
