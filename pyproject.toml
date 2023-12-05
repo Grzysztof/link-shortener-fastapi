@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "link-shortener-fastapi"
+version = "0.1.0"
+description = "Link shortening service"
+authors = ["Grzysztof <3384940+Grzysztof@users.noreply.github.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+ruff = "^0.1.7"
+fastapi = "^0.104.1"
+uvicorn = "^0.24.0.post1"
+httpx = "^0.25.2"
+pytest = {extras = ["pytest-asyncio"], version = "^7.4.3"}
+sqlalchemy = "^2.0.23"
+asyncpg = "^0.29.0"
+ujson = "^5.8.0"
+pydantic = "^2.5.2"
+pydantic-settings = "^2.1.0"
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+extend-select = ["E501"]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
